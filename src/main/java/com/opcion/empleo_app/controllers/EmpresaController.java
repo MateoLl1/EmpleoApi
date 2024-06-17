@@ -1,19 +1,30 @@
 package com.opcion.empleo_app.controllers;
 
 import java.util.List;
+import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.opcion.empleo_app.entities.Empresa;
-import com.opcion.empleo_app.services.EmpresaService;
+import com.opcion.empleo_app.domain.entities.Empresa;
+import com.opcion.empleo_app.domain.services.EmpresaService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/empresa")
 public class EmpresaController {
+
+
 
     @Autowired
     private EmpresaService service;
@@ -23,15 +34,34 @@ public class EmpresaController {
         return service.findAll();
     }
 
-    // @GetMapping("/${id}")
-    // public String findByID(@PathVariable Long id) {
-    // return "Valor id : " + id;
-    // }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        Optional<Empresa> empDb = service.findById(id);
+        if (empDb.isPresent()) {
+            return ResponseEntity.ok(empDb);
+        }
+        return ResponseEntity.ok(false);
+    }
 
-    // @PostMapping
-    // public boolean save(@RequestBody Empresa empresa) {
+    
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody Empresa empresa) {
+        Empresa empDb = service.save(empresa);
+        if (empDb != null) {
+            return ResponseEntity.ok(empDb) ;
+        } else {
+            return ResponseEntity.status(500).body(false);
+        }
+    }
 
-    // return false;
-    // }
+    @DeleteMapping
+    public boolean deleteById(@RequestParam Long id){
+        Optional<Empresa> empDb = service.findById(id);
+        if (empDb.isPresent()) {
+            service.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.opcion.empleo_app.entities;
+package com.opcion.empleo_app.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
