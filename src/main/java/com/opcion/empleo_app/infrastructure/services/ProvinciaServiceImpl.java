@@ -1,4 +1,4 @@
-package com.opcion.empleo_app.services;
+package com.opcion.empleo_app.infrastructure.services;
 
 import java.util.List;
 import java.util.Optional;
