@@ -12,6 +12,7 @@ import com.opcion.empleo_app.domain.repositories.TpUsuarioRepository;
 import com.opcion.empleo_app.domain.services.TpUsuarioService;
 
 @Service
+@Primary
 public class TpUsuarioServiceImpl implements TpUsuarioService {
 
     @Autowired

@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tbl_usuario")
+@Table(name = "tbl_usuarios")
 public class Usuario {
     
     @Id
@@ -50,12 +50,16 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "tp_us_id")
     private TpUsuario tpUsuario;
+    
+    @ManyToOne
+    @JoinColumn(name = "prov_id")
+    private Provincia provincia;
 
     public Usuario() {
     }
 
     public Usuario(Long id, String nombre, String email, String password, String cedula, String imagen,
-            Date feNacimiento, Date feRegistro, char sexo, char estado, TpUsuario tpUsuario) {
+            Date feNacimiento, Date feRegistro, char sexo, char estado) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -66,7 +70,6 @@ public class Usuario {
         this.feRegistro = feRegistro;
         this.sexo = sexo;
         this.estado = estado;
-        this.tpUsuario = tpUsuario;
     }
 
     public Long getId() {
@@ -155,6 +158,14 @@ public class Usuario {
 
     public void setTpUsuario(TpUsuario tpUsuario) {
         this.tpUsuario = tpUsuario;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
     
