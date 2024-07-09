@@ -1,14 +1,20 @@
 package com.opcion.empleo_app.domain.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -55,11 +61,21 @@ public class Usuario {
     @JoinColumn(name = "prov_id")
     private Provincia provincia;
 
-    public Usuario() {
-    }
+    @ManyToMany
+    @JoinTable(
+        name = "tbl_postulaciones",
+        joinColumns = @JoinColumn(name = "usu_id"),
+        inverseJoinColumns = @JoinColumn(name = "ofe_id")
+    )
+    private List<Oferta> ofertas;
 
+    public Usuario() {
+        ofertas = new ArrayList<>();
+    }
+    
     public Usuario(Long id, String nombre, String email, String password, String cedula, String imagen,
             Date feNacimiento, Date feRegistro, char sexo, char estado) {
+        this();
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -166,6 +182,18 @@ public class Usuario {
 
     public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
+    }
+
+
+
+    public List<Oferta> getOfertas() {
+        return ofertas;
+    }
+
+
+
+    public void setOfertas(List<Oferta> ofertas) {
+        this.ofertas = ofertas;
     }
 
     
