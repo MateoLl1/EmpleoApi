@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.opcion.empleo_app.domain.entities.Usuario;
 import com.opcion.empleo_app.domain.services.UsuarioService;
 
+
+
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
@@ -53,5 +55,16 @@ public class UsuarioController {
         }
         return false;
     }
+
+
+    @GetMapping("/login")
+    public Optional<Usuario> login(@RequestParam String email,@RequestParam String password){
+        Optional<Usuario> usuDb = service.login(email, password);
+        if (usuDb.isPresent()) {
+            return usuDb;
+        }
+        return null;
+    }
+
 
 }

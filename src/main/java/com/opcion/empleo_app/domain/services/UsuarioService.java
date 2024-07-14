@@ -15,5 +15,6 @@ public interface UsuarioService {
 
     void deleteById(Long id);
 
+    Optional<Usuario> login(String email,String password);
 
 }
