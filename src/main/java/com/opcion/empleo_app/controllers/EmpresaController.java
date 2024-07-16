@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.opcion.empleo_app.domain.entities.Empresa;
 import com.opcion.empleo_app.domain.services.EmpresaService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/empresa")
 public class EmpresaController {
