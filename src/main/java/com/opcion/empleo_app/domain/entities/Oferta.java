@@ -1,8 +1,6 @@
 package com.opcion.empleo_app.domain.entities;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -63,11 +60,11 @@ public class Oferta {
     @JoinColumn(name = "em_id")
     private Empresa empresa;
 
-    @ManyToMany
-    private List<Usuario> usuarios;
+    // @ManyToMany
+    // private List<Usuario> usuarios;
 
     public Oferta() {
-        usuarios = new ArrayList<>();
+        // usuarios = new ArrayList<>();
     }
 
 
@@ -259,18 +256,7 @@ public class Oferta {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-
-
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
+    
 }
 
 // {

@@ -1,5 +1,6 @@
 package com.opcion.empleo_app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.opcion.empleo_app.domain.entities.Empresa;
 import com.opcion.empleo_app.domain.entities.Oferta;
+import com.opcion.empleo_app.domain.services.EmpresaService;
 import com.opcion.empleo_app.domain.services.OfertaService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,9 +30,21 @@ public class OfertaController {
     @Autowired
     private OfertaService service;
 
+    @Autowired
+    private EmpresaService serviceEmpresa;
+
     @GetMapping
     public List<Oferta> findAll(){
         return service.findAll();
+    }
+
+    @GetMapping("/id-empresa")
+    public List<Oferta> findAllByIdEmpresa(@RequestParam Long id){
+        Optional<Empresa> empDb = serviceEmpresa.findById(id);
+        if (empDb.isPresent()) {
+            return service.findByEmpresa(empDb.get());
+        }
+        return new ArrayList<>();
     }
 
     @GetMapping("/{id}")

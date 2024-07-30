@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.opcion.empleo_app.domain.entities.Empresa;
 import com.opcion.empleo_app.domain.entities.Oferta;
 import com.opcion.empleo_app.domain.repositories.OfertaRepository;
 import com.opcion.empleo_app.domain.services.OfertaService;
@@ -36,6 +37,11 @@ public class OfertaServiceImpl implements OfertaService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Oferta> findByEmpresa(Empresa empresa) {
+        return repository.findByEmpresa(empresa);
     }
     
 }
