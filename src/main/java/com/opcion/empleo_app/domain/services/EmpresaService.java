@@ -12,8 +12,9 @@ public interface EmpresaService {
     Empresa save(Empresa empresa);
 
     Optional<Empresa> findById(Long id);
-
     
     void deleteById(Long id);
+
+    Optional<Empresa> login(String email,String password);
 
 }

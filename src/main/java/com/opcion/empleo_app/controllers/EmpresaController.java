@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.opcion.empleo_app.domain.entities.Empresa;
+import com.opcion.empleo_app.domain.entities.Usuario;
 import com.opcion.empleo_app.domain.services.EmpresaService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -64,6 +65,15 @@ public class EmpresaController {
             return true;
         }
         return false;
+    }
+
+    @GetMapping("/login")
+    public Optional<Empresa> login(@RequestParam String email,@RequestParam String password){
+        Optional<Empresa> empDb = service.login(email, password);
+        if (empDb.isPresent()) {
+            return empDb;
+        }
+        return null;
     }
 
 }

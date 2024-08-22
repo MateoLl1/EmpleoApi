@@ -36,6 +36,11 @@ public class EmpresaServiceImpl implements EmpresaService {
         repository.deleteById(id);
     }
 
+    @Override
+    public Optional<Empresa> login(String email, String password) {
+        return repository.findByEmailAndPassword(email, password);
+    }
+
 
 
     
