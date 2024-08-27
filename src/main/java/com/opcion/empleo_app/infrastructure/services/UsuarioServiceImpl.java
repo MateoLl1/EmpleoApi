@@ -48,6 +48,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         return repository.findByEmailAndPassword(email, password);
     }
 
+    @Override
+    public void updatePasswordByEmail(String email, String newPassword) {
+        repository.updatePasswordByEmail(email, newPassword);
+    }
+
     
     
 }

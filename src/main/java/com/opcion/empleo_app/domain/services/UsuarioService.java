@@ -14,7 +14,9 @@ public interface UsuarioService {
     Optional<Usuario> findById(Long id);
 
     void deleteById(Long id);
-
+    
     Optional<Usuario> login(String email,String password);
+    
 
+    void updatePasswordByEmail(String email,String newPassword);
 }

@@ -14,7 +14,7 @@ public class EmailService {
     public void sendPin(String to, String pin) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setSubject("Tu código de verificación");
+        message.setSubject("Tu nueva contraseña");
         message.setText("Tu código de verificación es: " + pin);
         mailSender.send(message);
     }

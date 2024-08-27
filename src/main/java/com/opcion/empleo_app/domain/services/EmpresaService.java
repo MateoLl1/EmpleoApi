@@ -17,4 +17,6 @@ public interface EmpresaService {
 
     Optional<Empresa> login(String email,String password);
 
+    void updatePasswordByEmail(String email,String newPassword);
+
 }

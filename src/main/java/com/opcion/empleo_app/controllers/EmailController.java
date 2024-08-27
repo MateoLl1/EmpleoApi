@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.opcion.empleo_app.domain.services.EmpresaService;
+import com.opcion.empleo_app.domain.services.UsuarioService;
 import com.opcion.empleo_app.infrastructure.services.EmailService;
 
+
 @RestController
-@RequestMapping("/api/security/email")
+@RequestMapping("/api/security")
 public class EmailController {
 
     private static final SecureRandom random = new SecureRandom();
@@ -25,16 +28,32 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @GetMapping("/{email}")
-    public String sendPin(@PathVariable String email) {
+    @Autowired
+    private EmpresaService empresaService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @GetMapping("/{email}/{tipo}")
+    public String sendPin(@PathVariable String email,@PathVariable Long tipo) {
         try {
             String pin = generatePin();
             emailService.sendPin(email, pin);
-            return "Pin enviado a " + email;
+            if (tipo == 0) { //EMPRESA
+                empresaService.updatePasswordByEmail(email, pin);
+                return "Contraseña de empresa actualizada recibe su correo" + email;
+            }else if(tipo==1){  //USUARIO
+                usuarioService.updatePasswordByEmail(email, pin);
+                return "Contraseña usuario actualizada recibe su correo" + email;
+            }else{
+                return "El tipo es invalido";
+            }
         } catch (Exception e) {
             return "Error al enviar codigo, verifica el correo";
         }
     }
+
+    
 
 
 }
