@@ -41,10 +41,10 @@ public class EmailController {
             emailService.sendPin(email, pin);
             if (tipo == 0) { //EMPRESA
                 empresaService.updatePasswordByEmail(email, pin);
-                return "Contraseña de empresa actualizada recibe su correo" + email;
+                return "Contraseña de empresa actualizada, revice su correo" + email;
             }else if(tipo==1){  //USUARIO
                 usuarioService.updatePasswordByEmail(email, pin);
-                return "Contraseña usuario actualizada recibe su correo" + email;
+                return "Contraseña usuario actualizada, revice su correo" + email;
             }else{
                 return "El tipo es invalido";
             }
